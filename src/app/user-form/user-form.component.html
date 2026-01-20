@@ -1,0 +1,164 @@
+<div class="wrap">
+  <div class="app-hero-header d-flex align-items-center">
+
+    <!-- Breadcrumb starts -->
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <i class="ri-home-8-line lh-1 pe-3 me-3 border-end"></i>
+        <a routerLink="/home">{{'Home'| translate}}</a>
+      </li>
+      <li class="breadcrumb-item" aria-current="page">
+        <a routerLink="/user-list">{{'Users List'| translate}}</a>
+      </li>
+      <li class="breadcrumb-item text-primary" aria-current="page">{{'User Add'| translate}}</li>
+    </ol>
+    <!-- Breadcrumb ends -->
+  </div>
+  <div class="app-body">
+    <div class="row gx-3">
+      <div class="col-sm-12 col-12">
+        <div class="card">
+          <div class="card-header">
+            <h5 class="card-title">{{'Add User'| translate}}</h5>
+          </div>
+          <div class="card-body">
+            <!-- Row Start -->
+            <form [formGroup]="user">
+              <div class="row gx-3 mt-1">
+                <div class="col-xxl-3 col-lg-12 col-sm-12">
+                    <div class="mb-3">
+                    <label class="form-label" for="1">{{'User Type' | translate}}</label>
+                    <div class="input-group">
+                        <select class="form-select" id="1" class="form-control" formControlName="appUserTypeId">
+                            <option value="0">{{'Select User Type'| translate}}</option>
+                            <option [ngValue]="item.appUserTypeId" *ngFor="let item of userTypeData">
+                                {{item.description}}
+                            </option>
+                        </select>
+                    </div>
+                    </div>
+                </div>
+                <div class="col-xxl-3 col-lg-12 col-sm-12">
+                    <div class="mb-3">
+                    <label class="form-label" for="2">{{'App Master' | translate}}</label>
+                    <div class="input-group">
+                        <select class="form-select" id="2" class="form-control" formControlName="appMasterId">
+                            <option value="0">{{'Select App Master'| translate}}</option>
+                            <option [ngValue]="item.appMasterId" *ngFor="let item of appMasterData">
+                                {{item.description}}
+                            </option>
+                        </select>
+                    </div>
+                    </div>
+                </div>
+                <div class="col-xxl-3 col-lg-4 col-sm-6">
+                  <div class="mb-3">
+                    <label class="form-label" for="3">{{'User Name' | translate}}</label>
+                    <div class="input-group">
+                      <input type="text" class="form-control" autocomplete="no-fill" formControlName="username" id="3" placeholder="{{'Enter User Name' | translate}}">
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xxl-3 col-lg-4 col-sm-6">
+                  <div class="mb-3">
+                    <label class="form-label" for="4">{{'Full Name'| translate}}</label>
+                    <div class="input-group">
+                      <input type="text" class="form-control" formControlName="fullName" id="4" placeholder="{{'Enter Full Name'| translate}}" [ngClass]="{ 'is-invalid': submitted && user.controls.fullName.errors}">
+                    <div *ngIf="submitted && user.controls.fullName.errors" class="invalid-feedback">
+                        <div *ngIf="user.get('fullName')?.errors?.['required']">{{'Full Name is required'| translate}}.</div>
+                    </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xxl-3 col-lg-4 col-sm-6">
+                  <div class="mb-3">
+                    <label class="form-label" for="5">{{'Email'| translate}}<span class="text-danger">*</span></label>
+                    <div class="input-group">
+                      <input type="text" class="form-control" formControlName="email" id="5" placeholder="{{'Enter Email'| translate}}" [ngClass]="{ 'is-invalid': submitted && user.controls.email.errors}">
+                        <div *ngIf="submitted && user.controls.email.errors" class="invalid-feedback">
+                          <div *ngIf="user.get('email')?.errors?.['required']">{{'Email is required'| translate}}.</div>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xxl-3 col-lg-4 col-sm-6">
+                  <div class="mb-3">
+                    <label class="form-label" for="6">{{'Password'| translate}}<span class="text-danger">*</span></label>
+                    <div class="input-group">
+                      <input type="password" class="form-control" autocomplete="no-fill" formControlName="passwordHash" id="6" placeholder="{{'Enter Password'| translate}}" [ngClass]="{ 'is-invalid': submitted && user.controls.passwordHash.errors}">
+                        <div *ngIf="submitted && user.controls.passwordHash.errors" class="invalid-feedback">
+                          <div *ngIf="user.get('passwordHash')?.errors?.['required']">{{'Password is required'| translate}}.</div>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xxl-3 col-lg-4 col-sm-6">
+                  <div class="mb-3">
+                    <label class="form-label" for="7">{{'Phone Number'| translate}}<span class="text-danger">*</span></label>
+                    <div class="input-group">
+                      <input type="text" class="form-control" formControlName="phoneNumber" id="7" placeholder="{{'Enter Phone Number'| translate}}" [ngClass]="{ 'is-invalid': submitted && user.controls.phoneNumber.errors}">
+                        <div *ngIf="submitted && user.controls.phoneNumber.errors" class="invalid-feedback">
+                          <div *ngIf="user.get('phoneNumber')?.errors?.['required']">{{'Phone Number is required'| translate}}.</div>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xxl-3 col-lg-12 col-sm-12">
+                    <div class="mb-3">
+                    <label class="form-label" for="8">{{'Role' | translate}}</label>
+                    <div class="input-group">
+                        <select class="form-select" id="8" class="form-control" formControlName="appRoleId">
+                            <option value="0">{{'Select Role'| translate}}</option>
+                            <option  *ngFor="let item of roleData" value="{{item.appRoleId}}">
+                                {{item.roleName}}
+                            </option>
+                        </select>
+                    </div>
+                    </div>
+                </div>
+                <div class="col-xxl-3 col-lg-12 col-sm-12">
+                    <div class="mb-3">
+                    <label class="form-label" for="9">{{'Branch Unit' | translate}}</label>
+                    <div class="input-group">
+                        <select class="form-select" id="9" class="form-control" formControlName="branchUnitId">
+                            <option value="null">{{'Select Branch Unit'| translate}}</option>
+                            <option *ngFor="let item of branchUnitData" value="{{item.branchUnitId}}">
+                                [{{item.code}}] {{item.branchUnit}}
+                            </option>
+                        </select>
+                    </div>
+                    </div>
+                </div>
+                <div class="col-xxl-3 col-lg-4 col-sm-6">
+                  <div class="mb-3">
+                    <label class="form-label" for="10">{{'Start Date'| translate}}</label>
+                    <div class="input-group">
+                      <input type="date" class="form-control" formControlName="startDate" id="10">
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xxl-2 col-lg-4 col-sm-6">
+                    <div class="mb-3">
+                        <div class="form-check form-switch mt-4">
+                            <input class="form-check-input" type="checkbox" role="switch" formControlName="isActive" id="11">
+                            <label class="form-check-label" for="11">{{'Status'| translate}}</label>
+                        </div>
+                    </div>
+                </div>
+              </div>
+            </form>
+            <div class="col-sm-12">
+              <div class="d-flex gap-2 justify-content-end">
+                <a type="button" class="btn btn-outline-secondary" routerLink="/user-list">{{'Cancel'| translate}}</a>
+                <a *ngIf="editMode" type="button" class="btn btn-primary" (click)="saveForm()">    {{'Update'| translate}}
+                </a>
+                <a *ngIf="!editMode" type="button" class="btn btn-primary" (click)="saveForm()">{{'Save'| translate}}
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

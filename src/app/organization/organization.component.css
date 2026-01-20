@@ -1,0 +1,38 @@
+
+.btn-bwm{
+    background-color: #007bff;
+    border-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    font-size: 15px;
+    margin-top: 30px;
+
+    
+}
+.btn-bwm:hover {
+    background-color:#007bff  !important;
+    border-color: #007bff !important;
+}
+.btn-bwm
+input{
+    display: none;
+}
+.image-upload-container{
+    cursor: pointer;
+}
+ .img-preview-container{
+     background-color: #f7f7f7;
+     width: 200px;
+     position: absolute;
+     top: 0px;
+     right: -70px;
+     
+ 
+ }
+
+ .img-preview{
+     background: center center no-repeat;
+     background-size: contain;
+     width: 216px;
+     height: 100px;
+ }

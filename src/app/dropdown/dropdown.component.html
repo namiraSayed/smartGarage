@@ -1,0 +1,382 @@
+<div class="wrap">
+	<div class="app-hero-header d-flex align-items-center">
+
+		<!-- Breadcrumb starts -->
+		<ol class="breadcrumb">
+			<li class="breadcrumb-item">
+				<i class="ri-home-8-line lh-1 pe-3 me-3 border-end"></i>
+				<a routerLink="/home">{{'Home' | translate}}</a>
+			</li>
+			<li class="breadcrumb-item text-primary" aria-current="page">
+				{{'Dropdown' | translate}}
+			</li>
+
+		</ol>
+		<!-- Breadcrumb ends -->
+	</div>
+
+	<div class="app-body">
+		<div class="col-12 gx-3">
+			<h3>{{'Dropdown' | translate}}</h3>
+		</div>
+		<div class="card mb-2">
+			<div class="card-body">
+				<div class="row">
+					<div class="col-2">
+						<label class="form-label filterLabel">{{'Search' | translate}}:</label>
+						<input type="text" class="form-control " (keyup)="onSearchKey($event)" id="searchd">
+					</div>
+					<div class="col-10 align-self-end text-end">
+						<button routerLink="/departmentSpecialty" class="btn btn-primary ">{{'Add Dropdown Entity' |
+							translate}}</button>
+						<!-- @if(aclArr.includes('ADD') == true) {
+                            <button routerLink="/department" class="btn btn-primary ">{{'Add Department' | translate}}</button>
+                        } -->
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="row gx-3">
+			<div class="col-sm-12 col-12">
+				<div class="card mb-3">
+					<div class="card-body">
+						<div class="table-outer">
+							<div class="table-responsive">
+								<table class="table truncate m-0">
+									<thead>
+										<tr>
+											<th>{{'Id' | translate}}</th>
+											<th>{{'Type' | translate}}</th>
+											<th>{{'Sub Type' | translate}}</th>
+											<th>{{'Entity Code' | translate}}</th>
+											<th>{{'Entity' | translate}}</th>
+											<th>{{'Status' | translate}}</th>
+											<th>{{'Action' | translate}}</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr
+											*ngFor="let item of dropdownData | paginate: { itemsPerPage: itemsPerPage , currentPage: p, totalItems: totalItems } ">
+											<td>{{item.dropdownEntityId || 'N/A'}}</td>
+											<td>{{item.dropdownEntityType || 'N/A'}}</td>
+											<td>{{item.dropdownEntitySubType || 'N/A'}}</td>
+											<td>{{item.entityCode || 'N/A'}}</td>
+											<td>{{item.entity || 'N/A'}}</td>
+											<td>
+												<div class="">
+													<span *ngIf="item?.isActive == true" class="badge bg-success">{{'Active' | translate}}</span>
+													<span *ngIf="item?.isActive != true" class="badge bg-danger">{{'inActive' | translate}}</span>
+												</div>
+											</td>
+											<td class="p-1">
+												<!-- <a *ngIf="aclArr.includes('EDT')" class="btn btn-outline-success btn-sm table-btn" data-bs-placement="bottom" title="Edit" data-bs-toggle="tooltip" routerLink="/department/{{item.departmentId}}">
+                                                    <i class="ri-edit-box-line"></i>
+                                                </a> -->
+												<a class="btn btn-outline-success btn-sm table-btn" data-bs-placement="bottom" title="Edit"
+													data-bs-toggle="tooltip" routerLink="/departmentSpecialty/{{item.departmentSpecialityId}}">
+													<i class="ri-edit-box-line"></i>
+												</a>
+												<!-- <a class="btn btn-outline-info btn-sm table-btn" data-bs-placement="bottom" title="View" data-bs-toggle="tooltip" (click)="onView(item)">
+                                                    <i class="ri-eye-line"></i>
+                                                </a> -->
+												<button class="btn btn-sm btn-primary btn-table" (click)="openValue(item)">Entity Value</button>
+												<!-- <a class="btn btn-outline-danger btn-sm table-btn" data-bs-toggle="modal" href="#">
+                                                    <i class="ri-delete-bin-line"></i>
+                                                </a> -->
+											</td>
+										</tr>
+										<tr *ngIf="notFound == true">
+											<td>{{'Data Not Found' | translate}}</td>
+										</tr>
+									</tbody>
+								</table>
+								<div class="pagi border-top p-2 mt-2 pb-0 row m-0 align-content-center">
+									<div class="col-6">
+										<div class="mr-auto">
+											{{'Items per Page'| translate}}:
+											<select (change)="handlePageSizeChange($event)">
+												<option *ngFor="let size of pageSizes" [value]="size">
+													{{ size }}
+												</option>
+											</select>
+										</div>
+									</div>
+									<div class="col-6  text-end">
+										<pagination-controls (pageChange)="getPage(p = $event)"></pagination-controls>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="modal fade" id="entityValModal" tabindex="-1" aria-labelledby="exampleModalXlLabel"
+							aria-hidden="true">
+							<div class="modal-dialog " style="max-width: 80%;">
+								@if(isEntityValueModal == true) {
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title" id="exampleModalXlLabel">
+											@for(subType of entityValueData.dropdownEntitySubTypeList.dropdownEntitySubType; track subType) {
+												@for(entity of subType.dropdownEntityList.dropdownEntity; track entity) {
+													 [{{entity.entityCode}}] {{entity.entity}} Values
+												}
+											}
+										</h5>
+										<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+									</div>
+									<div class="modal-body">
+										<div class="row gx-3 mt-1">
+											<div class="col-8">
+												<input type="text" class="form-control" name="valuesearch" [(ngModel)]="termVal">
+											</div>
+											<div class="col-2">
+												<button class="btn btn-primary" (click)="newValueModal()">Add New Value</button>
+											</div>
+
+											<div class="col-12 mt-3">
+												<div class="">
+													<div class="table-responsive">
+														<table class="table turnborder m-0">
+															<thead>
+																<tr>
+																	<th>{{'Id' | translate}}</th>
+																	<th>{{'Code' | translate}}</th>
+																	<th>{{'Value' | translate}}</th>
+																	<th>{{'Definition' | translate}}</th>
+																	<th>{{'Other Value' | translate}}</th>
+																	<th>{{'Parent' | translate}}</th>
+																	<th>{{'Default' | translate}}</th>
+																	<th>{{'Status' | translate}}</th>
+																	<th>{{'Action' | translate}}</th>
+																</tr>
+															</thead>
+															<tbody>
+																<tr *ngFor="let item of entityValueArr | filter: termVal: 'value'">
+																	<td>{{item.dropdownValueId || 'N/A'}}</td>
+																	<td>{{item.code || 'N/A'}}</td>
+																	<td>{{item.value || 'N/A'}}</td>
+																	<td>{{item.definition || 'N/A'}}</td>
+																	<td>{{item.otherValue || 'N/A'}}</td>
+																	<td>{{item.parentId || 'N/A'}}</td>
+																	<td>
+																		<div class="">
+																			<span *ngIf="item?.isDefault == true"
+																				class="badge border border-success bg-success-subtle text-success">{{'Default' | translate}}</span>
+																			<span *ngIf="item?.isDefault != true"
+																				class="badge border border-danger bg-danger-subtle text-danger">{{'Not Default' | translate}}</span>
+																		</div>
+																	</td>
+																	<td>
+																		<div class="">
+																			<span *ngIf="item?.isActive == true"
+																				class="badge border border-success bg-success-subtle text-success">{{'Active' | translate}}</span>
+																			<span *ngIf="item?.isActive != true"
+																				class="badge border border-danger bg-danger-subtle text-danger">{{'inActive' | translate}}</span>
+																		</div>
+																	</td>
+																	<td class="p-1">
+																		<!-- <a *ngIf="aclArr.includes('EDT')" class="btn btn-outline-success btn-sm table-btn" data-bs-placement="bottom" title="Edit" data-bs-toggle="tooltip" routerLink="/department/{{item.departmentId}}">
+											                                                    <i class="ri-edit-box-line"></i>
+											                                                </a> -->
+																		<a class="btn btn-outline-success btn-sm table-btn" data-bs-placement="bottom" title="Edit" (click)="editValue(item)"
+																			data-bs-toggle="tooltip">
+																			<i class="ri-edit-box-line"></i>
+																		</a>
+																		<!-- <a class="btn btn-outline-info btn-sm table-btn" data-bs-placement="bottom" title="View" data-bs-toggle="tooltip" (click)="onView(item)">
+											                                                    <i class="ri-eye-line"></i>
+											                                                </a> -->
+																		<!-- <a class="btn btn-outline-danger btn-sm table-btn" data-bs-toggle="modal" href="#">
+											                                                    <i class="ri-delete-bin-line"></i>
+											                                                </a> -->
+																	</td>
+																</tr>
+																<tr *ngIf="notFound == true">
+																	<td>{{'Data Not Found' | translate}}</td>
+																</tr>
+															</tbody>
+														</table>
+													</div>
+												</div>
+											</div>
+											
+										</div>
+									</div>
+								</div>
+								}
+							
+							</div>
+						</div>
+							<div class="modal fade" id="addValueModal" tabindex="-1" aria-labelledby="exampleModalXlLabel"
+							aria-hidden="true">
+							<div class="modal-dialog modal-xl" >
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title" id="exampleModalXlLabel">
+											{{'Entity Value' | translate}}
+										</h5>
+										<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+									</div>
+									<div class="modal-body">
+									  <!-- Row Start -->
+            <form [formGroup]="entityValueForm">
+              <div class="row gx-3 mt-1">
+                <div class="col-xxl-3 col-lg-4 col-sm-6">
+                  <div class="mb-3">
+                    <label class="form-label" for="a13">{{'Code'| translate}}</label>
+                     <input type="text" class="form-control" formControlName="code" id="a1" placeholder="{{'Enter Code'| translate}}"
+                        [ngClass]="{ 'is-invalid': submittedValue && entityValueForm.controls.code.errors}">
+                      <div *ngIf="submittedValue && entityValueForm.controls.code.errors" class="invalid-feedback">
+                        <div *ngIf="entityValueForm.get('code')?.errors?.['required']">{{'Code is required'| translate}}.</div>
+                      </div>
+                  </div>
+                </div>
+                <div class="col-xxl-4 col-lg-4 col-sm-6">
+                  <div class="mb-3">
+                    <label class="form-label" for="a1">{{'Value'| translate}}<span class="text-danger">*</span></label>
+                    <div class="input-group">
+                      <input type="text" class="form-control" formControlName="value" id="a1" placeholder="{{'Enter Value'| translate}}"
+                        [ngClass]="{ 'is-invalid': submittedValue && entityValueForm.controls.value.errors}">
+                      <div *ngIf="submittedValue && entityValueForm.controls.value.errors" class="invalid-feedback">
+                        <div *ngIf="entityValueForm.get('value')?.errors?.['required']">{{'Value is required'| translate}}.</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+             
+                <div class="col-xxl-4 col-lg-4 col-sm-6">
+                  <div class="mb-3">
+                    <label class="form-label" for="a2">{{'Other Value'| translate}}</label>
+                    <div class="input-group">
+                     <input type="text" class="form-control" formControlName="otherValue" id="a1" placeholder="{{'Enter Other Value'| translate}}"
+                        [ngClass]="{ 'is-invalid': submittedValue && entityValueForm.controls.otherValue.errors}">
+                    </div>
+                  </div>
+                </div>
+				   <div class="col-xxl-6 col-lg-6 col-sm-12">
+                  <div class="mb-3">
+                    <label class="form-label" for="a1">{{'Definition'| translate}}</label>
+                    <div class="input-group">
+						<textarea name="definition" formControlName="definition" id="a1" class="form-control" [ngClass]="{ 'is-invalid': submittedValue && entityValueForm.controls.definition.errors}"></textarea>
+                       <!-- <input type="text" class="form-control" formControlName="value" id="a1" placeholder="{{'Enter definition'| translate}}"
+                        [ngClass]="{ 'is-invalid': submittedValue && entityValueForm.controls.definition.errors}"> -->
+                      <div *ngIf="submittedValue && entityValueForm.controls.definition.errors" class="invalid-feedback">
+                        <div *ngIf="entityValueForm.get('definition')?.errors?.['required']">{{'definition is required'| translate}}.</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+				<div class="col-xxl-2 col-lg-4 col-sm-6">
+                  <div class="mb-3">
+                    <div class="form-check form-switch mt-4">
+                      <input class="form-check-input" type="checkbox" role="switch" formControlName="isDefault" id="a7">
+                      <label class="form-check-label" for="a7">{{'Default'| translate}}</label>
+                    </div>
+                  </div>
+                </div>                
+                <div class="col-xxl-2 col-lg-4 col-sm-6">
+                  <div class="mb-3">
+                    <div class="form-check form-switch mt-4">
+                      <input class="form-check-input" type="checkbox" role="switch" formControlName="isActive" id="a7">
+                      <label class="form-check-label" for="a7">{{'Status'| translate}}</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+            <div class="col-sm-12">
+              <div class="d-flex gap-2 justify-content-end">
+                <a type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal" >{{'Cancel'| translate}}</a>
+                <a type="button" class="btn btn-primary" (click)="saveValueForm()">
+                  {{'Save'| translate}}
+                </a>
+              </div>
+            </div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="modal fade" id="modal-view" tabindex="-1" aria-labelledby="exampleModalXlLabel"
+							aria-hidden="true">
+							<div class="modal-dialog modal-xl">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title" id="exampleModalXlLabel">
+											{{'Department Speciality Details' | translate}}
+										</h5>
+										<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+									</div>
+									<div class="modal-body">
+										<div class="row gx-3 mt-1" *ngIf="isModal == true">
+											<div class="col-xxl-2 col-lg-2 col-sm-6">
+												<div class="mb-3">
+													<label class="form-label" for="a1">{{'Code' | translate}}</label>
+													<div class="input-group">
+														<input type="text" disabled [(ngModel)]="modalData.code" name="code" class="form-control"
+															id="a1">
+													</div>
+												</div>
+											</div>
+											<div class="col-xxl-3 col-lg-3 col-sm-6">
+												<div class="mb-3">
+													<label class="form-label" for="a4">{{'Nphies Code' | translate}}</label>
+													<div class="input-group">
+														<input type="text" disabled [(ngModel)]="modalData.nphiesCode" name="nphiesCode"
+															class="form-control" id="a4">
+													</div>
+												</div>
+											</div>
+											<div class="col-xxl-3 col-lg-3 col-sm-6">
+												<div class="mb-3">
+													<label class="form-label" for="a2">{{'Department Speciality' | translate}}</label>
+													<div class="input-group">
+														<input type="text" disabled [(ngModel)]="modalData.departmentSpeciality"
+															name="departmentSpeciality" class="form-control" id="a2">
+													</div>
+												</div>
+											</div>
+											<div class="col-xxl-3 col-lg-3 col-sm-6">
+												<div class="mb-3">
+													<label class="form-label" for="a2">{{'Department Speciality Long' | translate}}</label>
+													<div class="input-group">
+														<input type="text" disabled [(ngModel)]="modalData.departmentSpecialityL"
+															name="departmentSpecialityL" class="form-control" id="a2">
+													</div>
+												</div>
+											</div>
+											<div class="col-xxl-3 col-lg-3 col-sm-6">
+												<div class="mb-3">
+													<label class="form-label" for="a5">{{'Expense Account' | translate}}</label>
+													<div class="input-group">
+														<input type="text" disabled [(ngModel)]="modalData.expenseAccount" name="expenseAccount"
+															class="form-control" id="a5">
+													</div>
+												</div>
+											</div>
+											<div class="col-xxl-3 col-lg-3 col-sm-6">
+												<div class="mb-3">
+													<label class="form-label" for="a5">{{'Revenue Account' | translate}}</label>
+													<div class="input-group">
+														<input type="text" disabled [(ngModel)]="modalData.revenueAccount" name="revenueAccount"
+															class="form-control" id="a5">
+													</div>
+												</div>
+											</div>
+											<div class="col-xxl-3 col-lg-4 col-sm-6">
+												<div class="mb-3">
+													<div class="form-check form-switch mt-4">
+														<input class="form-check-input" type="checkbox" role="switch" disabled
+															[(ngModel)]="modalData.isActive" name="isActive" id="a8">
+														<label class="form-check-label" for="a8">{{'Status' | translate}}</label>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

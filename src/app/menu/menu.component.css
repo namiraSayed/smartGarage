@@ -1,0 +1,42 @@
+.menu-container {
+  font-family: Arial, sans-serif;
+  max-width: 420px;
+  margin: 20px;
+}
+
+.tree-node {
+  margin-left: 10px;
+  margin-top: 4px;
+}
+
+.node-line {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.toggle {
+  cursor: pointer;
+  width: 18px;
+  display: inline-block;
+  text-align: center;
+  font-weight: bold;
+  color: #333;
+}
+
+.toggle:hover {
+  color: #007bff;
+}
+
+label {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.children {
+  margin-left: 22px;
+  border-left: 1px dashed #ccc;
+  padding-left: 8px;
+}

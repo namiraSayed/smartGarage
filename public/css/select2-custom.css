@@ -1,0 +1,66 @@
+/* 1. Target the main container to match the form-control appearance */
+.select2-container--default .select2-selection--single {
+    /* Inherit standard Bootstrap padding, height, and border */
+    height: calc(2.25rem + 2px) !important; /* Standard Bootstrap height for form-control */
+    padding: 0.375rem 0.75rem !important; /* Standard Bootstrap padding */
+    border: 1px solid #ced4da !important; /* Standard Bootstrap border color */
+    border-radius: 0.25rem !important; /* Standard Bootstrap border radius */
+    
+    /* Ensure the text lines up correctly inside the container */
+    line-height: 1.5 !important; 
+}
+
+/* 2. Style the placeholder/selected text area */
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+    /* Push the text up to account for the height/padding changes */
+    padding: 0 !important;
+    line-height: 1.5 !important; 
+    color: #495057 !important; /* Standard Bootstrap text color */
+}
+
+/* 3. Adjust the clear button (if enabled) */
+.select2-container--default .select2-selection--single .select2-selection__clear {
+    line-height: 1.5 !important;
+    padding-right: 0 !important;
+}
+
+/* 4. Reposition the dropdown arrow icon */
+.select2-container--default .select2-selection--single .select2-selection__arrow {
+    height: calc(2.25rem + 2px) !important; /* Match container height */
+    top: 0 !important; /* Align to the top of the container */
+    
+    /* Ensure the icon is centered vertically */
+    display: flex !important;
+    align-items: center !important;
+}
+
+/* Optional: Focus state styling */
+.select2-container--default.select2-container--focus .select2-selection--single,
+.select2-container--default:hover .select2-selection--single {
+    /* Add a focus shadow to mimic Bootstrap's focused input */
+    border-color: #80bdff !important;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25) !important;
+}
+
+/* 5. Target the multi-select container */
+.select2-container--default .select2-selection--multiple {
+    /* Apply the standard form-control styling */
+    min-height: calc(2.25rem + 2px) !important; /* Ensure minimum height matches single input */
+    padding: 0.375rem 0.75rem !important;
+    border: 1px solid #ced4da !important;
+    border-radius: 0.25rem !important;
+}
+
+/* 6. Fix the input field inside the multi-select */
+.select2-container--default .select2-selection--multiple .select2-search--inline .select2-search__field {
+    /* Remove default Select2 styling that often causes misalignment */
+    margin: 0 !important;
+    padding: 0 !important;
+    height: auto !important;
+}
+
+/* Optional: Focus state for multi-select */
+.select2-container--default.select2-container--focus .select2-selection--multiple {
+    border-color: #80bdff !important;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25) !important;
+}

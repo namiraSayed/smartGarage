@@ -1,0 +1,269 @@
+
+<div class="page-wrapper">
+
+    <!-- App header starts -->
+    <div class="app-header d-flex align-items-center">
+  
+      <!-- Toggle buttons starts -->
+      <div class="d-flex">
+        <button class="toggle-sidebar">
+          <i class="ri-menu-line"></i>
+        </button>
+        <button class="pin-sidebar">
+          <i class="ri-menu-line"></i>
+        </button>
+      </div>
+      <!-- Toggle buttons ends -->
+  
+      <!-- App brand starts -->
+      <div class="app-brand ms-3">
+        <a href="index.html" class="d-lg-block d-none">
+          <img src="/images/garagelogo.png" class="logo" alt="Garage Admin Template"> <span class="text-white mt-1 ms-2 fs-4"><strong>Smart Garage</strong></span>
+        </a>
+        <a href="index.html" class="d-lg-none d-md-block">
+          <img src="images/logo-sm.svg" class="logo" alt="Garage Admin Template">
+        </a>
+      </div>
+      <!-- App brand ends -->
+  
+      <!-- App header actions starts -->
+      <div class="header-actions">
+        <!-- Header actions starts -->
+        <div class="d-lg-flex d-none gap-2">
+          <!-- <select class="form-control" #selectedLang (change)="switchLang(selectedLang.value)">
+            <option *ngFor="let language of translate.getLangs()" [value]="language"
+              [selected]="language === translate.currentLang">
+              {{ language }}
+            </option>
+          </select> -->
+
+          <select class="form-control" #selectedLang (change)="switchLang(selectedLang.value)">
+            <option *ngFor="let language of translate.getLangs()" [value]="language"
+              [selected]="language === translate.currentLang">
+              {{ language }}
+            </option>
+          </select>
+          <!-- Select country dropdown starts -->
+          <!-- <div class="dropdown">
+            <a class="dropdown-toggle header-icon" href="#!" role="button" data-bs-toggle="dropdown"
+              aria-expanded="false" >
+              <img [src]="sCountryImage" class="header-country-flag" alt="Bootstrap Dashboards">
+            </a>
+            <div class="dropdown-menu dropdown-menu-end dropdown-mini">
+              <div class="country-container">
+                @for(lang of languageArr; track lang.language) {
+                  <a class="py-2">
+                    <img (click)="switchLang(lang)" [src]="lang.country" alt="Admin Panel">
+                  </a>
+                }
+              </div>
+            </div>
+          </div> -->
+          <!-- Select country dropdown ends -->
+        </div>
+        <!-- Header actions ends -->
+  
+        <!-- Header user settings starts -->
+        <div class="dropdown ms-2">
+          <a id="userSettings" class="dropdown-toggle d-flex align-items-center" href="#!" role="button"
+            data-bs-toggle="dropdown" aria-expanded="false">
+            <div class="avatar-box">{{userInitial}}<span class="status busy"></span></div>
+          </a>
+          <div class="dropdown-menu dropdown-menu-end shadow-lg">
+            <div class="px-3 py-2">
+              <span class="small">{{userloginData.departmentRole}}</span>
+              <h6 class="m-0">{{userloginData.username}}</h6>
+            </div>
+            <div class="mx-3 my-2 d-grid">
+              <a (click)="logout()" class="btn btn-danger">Logout</a>
+            </div>
+          </div>
+        </div>
+        <!-- Header user settings ends -->
+  
+      </div>
+      <!-- App header actions ends -->
+  
+    </div>
+    <!-- App header ends -->
+  
+    <!-- Main container starts -->
+    <div class="main-container">
+  
+      <!-- Sidebar wrapper starts -->
+      <nav id="sidebar" class="sidebar-wrapper" >
+  
+        <!-- Sidebar profile starts -->
+        <div class="sidebar-profile">
+          <img src="/images/patient.png"  class="img-shadow img-3x me-3 rounded-5" alt="Hospital Admin Templates">
+          <!-- <ng-container *ngIf="userloginData.profileImage == 'Not Available'">
+            <img src="/images/user1.png"  class="img-shadow img-3x me-3 rounded-5" alt="Hospital Admin Templates">
+          </ng-container> -->
+          <!-- <ng-container *ngIf="userloginData.profileImage !== 'Not Available'">
+            <img src="{{imageUrl + userloginData.profileImage}}" class="img-shadow img-3x me-3 rounded-5" alt="Hospital Admin Templates">
+          </ng-container> -->
+          <div class="m-0">
+            <h5 class="mb-1 profile-name text-nowrap text-truncate">{{userloginData.username}}</h5>
+            <p class="m-0 small profile-name text-nowrap text-truncate">{{userloginData.departmentRole}}</p>
+          </div>
+        </div>
+        <!-- Sidebar profile ends -->
+  
+        <!-- Sidebar menu starts -->
+        <div class="sidebarMenuScroll" style="overflow-y: auto;">
+          <ul class="sidebar-menu">
+            <li>
+              <a class="cursorPoint" routerLink="about">
+                <i class="ri-heart-pulse-line"></i>
+                <span class="menu-text">{{'About' | translate}}</span>
+              </a>
+            </li>
+             <li>
+              <a class="cursorPoint" routerLink="invoice">
+                <i class="ri-user-2-line"></i>
+                <span class="menu-text">{{'Invoice' | translate}}</span>
+              </a>
+            </li>
+            <li *ngFor="let menu of menuNoChild">
+              <a class="cursorPoint" [routerLink]="menu.menuUrl">
+                <i class="ri-heart-pulse-line"></i>
+                <span class="menu-text">{{menu.name}}</span>
+              </a>
+            </li>
+            
+    <!-- Menus with children -->
+    @for(menu of menuChildren; track menu.appMenuId) {
+      @if(menu.isDisplay) {
+        <li class="treeview"
+            [class.active]="menu.open"
+            (click)="openParent(menu, $event)">
+          <a class="cursorPoint">
+            <i class="ri-heart-pulse-line"></i>
+            <span class="menu-text">{{ menu.name }}</span>
+          </a>
+
+          <ul class="treeview-menu" [class.show]="menu.open">
+            @for(child of menu?.childrenList?.children; track child.appMenuId) {
+              @if(child.isDisplay) {
+                <li [class.active]="child.open"
+                    (click)="openChild(menu, child, $event)">
+                  <a class="cursorPoint">
+                    {{ child.name }}
+                    
+                    <i *ngIf="child?.isOpen == true"
+                       class="arrow"
+                       [ngClass]="child.open ? 'ri-arrow-down-s-line' : 'ri-arrow-right-s-line'"></i>
+                     
+                  </a>
+
+                  <ul class="treeview-menu" *ngIf="child?.childrenList !== null" [class.show]="child.open1">
+                    @for(sub of child?.childrenList?.children; track sub.appMenuId) {
+                      @if(sub.isDisplay) {
+                        <li>
+                          <a class="cursorPoint"
+                             (click)="selectedMenu(sub, child, $event)">
+                            {{ sub.name }} 
+                            <i *ngIf="sub?.isOpen1 == true" class="arrow" [ngClass]="sub.open1 ? 'ri-arrow-down-s-line' : 'ri-arrow-right-s-line'"></i>
+                          </a>
+                           
+
+                  <ul class="treeview-menu" *ngIf="sub?.childrenList !== null" [class.show]="sub.open1">
+                    @for(subChild of sub?.childrenList?.children; track subChild.appMenuId) {
+                      @if(subChild.isDisplay) {
+                        <li>
+                          <a class="cursorPoint"
+                             (click)="selectedMenu1(subChild, sub, child, $event)">
+                            {{ subChild.name }}
+                          </a>
+                        </li>
+                      }
+                    }
+                  </ul>
+                        </li>
+                      }
+                    }
+                  </ul>
+                </li>
+              }
+            }
+          </ul>
+        </li>
+      }
+    }
+
+
+
+
+
+
+
+
+
+    
+            <!-- WRSETDF -->
+            <!-- <ng-container *ngFor="let menu of menuChildren" > -->
+              <!-- @for(menu of menuChildren; track menu.appMenuId) {
+                @if(menu.isDisplay == true) {
+                  <li class="treeview" id="parent_{{menu.appMenuId}}" (click)="openParent($event, menu)">
+                    <a class="cursorPoint">
+                      <i class="ri-heart-pulse-line"></i>
+                      <span class="menu-text">{{menu.name}}</span>
+                    </a>
+                    <ul class="treeview-menu">
+                      @for(child of menu.childrenList.children; track child.appMenuId){
+                      @if(child.isDisplay == true) {
+                      <li id="childLi_{{child.appMenuId}}">
+                        <a class="cursorPoint" (click)="selectedMenu(child, menu, $event, 1)"
+                          id="child_{{child.appMenuId}}">
+                          {{child.name}} <i class="ri-arrow-right-s-line"></i>
+                        </a>
+                        <ul class="treeview-menu" id="childul_{{child.appMenuId}}">
+                          <li>
+                            <a>Level Three Link</a>
+                          </li>
+                          <li>
+                            <a>Level Three Link</a>
+                          </li>
+                        </ul>
+                      </li>
+                      }
+                      }
+                    </ul>
+                  
+                  </li>
+                }
+              }
+             -->
+        
+          </ul>
+        </div>
+        <!-- Sidebar menu ends -->
+  
+        <!-- Sidebar contact starts -->
+        <div class="sidebar-contact">
+          <p class="fw-light mb-1 text-nowrap text-truncate">Emergency Contact</p>
+          <h5 class="m-0 lh-1 text-nowrap text-truncate">0987654321</h5>
+          <i class="ri-phone-line"></i>
+        </div>
+        <!-- Sidebar contact ends -->
+  
+      </nav>
+      <!-- Sidebar wrapper ends -->
+  
+      <!-- App container starts -->
+      <div class="app-container">
+  
+          <router-outlet />
+        <!-- App footer starts -->
+        <div class="app-footer bg-white">
+          <span>© Smart Garage Admin 2024</span>
+        </div>
+        <!-- App footer ends -->
+  
+      </div>
+      <!-- App container ends -->
+  
+    </div>
+    <!-- Main container ends -->
+  
+  </div>

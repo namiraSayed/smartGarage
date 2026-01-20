@@ -1,0 +1,118 @@
+/* .login-bg {
+     font-family: sans-serif;
+  min-height: 100vh;
+  background: linear-gradient(180deg, #1f7fd8 0%, #1565c0 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-card {
+  width: 100%;
+  max-width: 1100px;
+  height: 560px;
+  background: #ffffff;
+  border-radius: 18px;
+  overflow: hidden;
+}
+
+.login-illustration {
+  background: linear-gradient(180deg, #1f7fd8, #1b6fc2);
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.login-illustration h3 {
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.login-illustration p {
+  font-size: 13px;
+  opacity: 0.9;
+}
+
+.login-illustration img {
+  max-width: 100%;
+  margin: auto;
+}
+
+.auth-box {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 48px;
+}
+
+.auth-box h5 {
+  font-weight: 600;
+}
+
+.auth-box {
+    min-width: 100%;
+    max-width: 100%;
+}
+
+.form-control {
+  height: 42px;
+  border-radius: 6px;
+}
+
+.input-group .btn {
+  border-radius: 0 6px 6px 0;
+}
+
+.btn-primary {
+  height: 42px;
+  border-radius: 6px;
+  font-weight: 500;
+}
+
+@media (max-width: 991px) {
+  .login-card {
+    height: auto;
+  }
+} */
+
+
+
+.login-bg {
+  background: #0f1115 url(../../../public/images/login-bg.jpg) no-repeat;
+  background-size: cover;
+  background-position: bottom center;
+  background-attachment: fixed;
+}
+
+.auth-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  min-height: 100vh;
+}
+
+@media (max-width: 991.98px) {
+  .auth-wrapper {
+    justify-content: center;
+  }
+}
+.auth-box {
+  background: #ffffff;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  padding: 20px;
+  margin: 2rem 0;
+  min-width: 350px;
+  max-width: 350px;
+}
+
+.auth-logo {
+  display: inline-flex;
+}
+.auth-logo img {
+  max-width: 180px;
+  max-height: 40px;
+}

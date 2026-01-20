@@ -1,0 +1,113 @@
+.tree-container {
+  height: 250px;        /* FIXED HEIGHT — change as needed */
+  overflow-y: auto;     /* Vertical scroll */
+  overflow-x: hidden;   /* Remove horizontal scroll */
+  border: 1px solid #ddd;
+  padding: 6px;
+  border-radius: 6px;
+  background: #fff;
+}
+.tree-container::-webkit-scrollbar {
+  width: 6px;
+}
+
+.tree-container::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 4px;
+}
+
+.tree-container::-webkit-scrollbar-thumb:hover {
+  background: #b3b3b3;
+}
+
+.tree {
+  list-style: none;
+  padding-left: 10px;
+}
+
+.node {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+}
+
+.icon {
+  display: inline-block;
+  transition: transform .25s ease;
+  cursor: pointer;
+}
+
+.icon.rotated {
+  transform: rotate(90deg);
+}
+
+.children {
+  list-style: none;
+  padding-left: 20px;
+
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height .25s ease-out;
+}
+
+.children.open {
+  max-height: 500px; /* enough room for items */
+}
+
+.search-box {
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 6px;
+}
+
+.role-container {
+  font-family: Arial, sans-serif;
+  max-width: 450px;
+  margin: 20px;
+}
+
+.tree-node {
+  margin-left: 10px;
+  margin-top: 6px;
+}
+
+.node-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+}
+
+.toggle-btn {
+  background: transparent;
+  border: none;
+  font-size: 14px;
+  cursor: pointer;
+  width: 20px;
+  text-align: center;
+}
+
+.toggle-btn:hover {
+  color: #007bff;
+}
+
+.children {
+  margin-left: 20px;
+  border-left: 1px dashed #ccc;
+  padding-left: 8px;
+  margin-top: 4px;
+}
+
+
+.tree-node {
+  margin: 4px 0;
+}
+
+.tree-container input[type='checkbox'] {
+  margin-right: 6px;
+}
+.accordion-button {
+    background: #11111111;
+    padding: 10px 13px !important;
+}

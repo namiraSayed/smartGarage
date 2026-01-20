@@ -1,0 +1,548 @@
+<div class="wrap">
+  <div class="app-hero-header d-flex align-items-center">
+
+    <!-- Breadcrumb starts -->
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <i class="ri-home-8-line lh-1 pe-3 me-3 border-end"></i>
+        <a routerLink="/home">{{'Home'| translate}}</a>
+      </li>
+      <li class="breadcrumb-item text-primary">
+        <a routerLink="/employee-list">{{'Employee List'| translate}}</a>
+      </li>
+      <li class="breadcrumb-item text-primary" aria-current="page">
+        <a>{{'Employee Add'| translate}}</a>
+      </li>
+    </ol>
+    <!-- Breadcrumb ends -->
+  </div>
+  <div class="app-body">
+    <div class="row gx-3">
+      <div class="col-sm-12 col-12">
+        <div class="card">
+          <div class="card-header">
+            <h5 class="card-title">{{'Add Employee'| translate}}</h5>
+          </div>
+          <div class="card-body">
+            <!-- Row starts -->
+            <form [formGroup]="employeeform">
+              <div class="row gx-3">
+                <div class="col-xxl-3 col-lg-4 col-sm-6">
+                  <div class="mb-3">
+                    <label class="form-label" for="1">{{'Employee No' | translate}} <span
+                        class="text-danger">*</span></label>
+                    <input type="text" class="form-control" formControlName="employeeNo" id="1"
+                      placeholder="{{'Enter Employee No' | translate}}"
+                      [ngClass]="{ 'is-invalid': submitted && employeeform.controls.employeeNo.errors }">
+                    <div *ngIf="submitted && employeeform.controls.employeeNo.errors" class="invalid-feedback">
+                      <div *ngIf="employeeform.get('employeeNo')?.errors?.['required']">{{'Employee No is required.' |
+                        translate}}</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xxl-3 col-lg-4 col-sm-6">
+                  <div class="mb-3">
+                    <label class="form-label" for="3">{{'First Name' | translate}} <span
+                        class="text-danger">*</span></label>
+                    <input type="text" class="form-control" formControlName="firstName" id="3"
+                      placeholder="{{'Enter First Name' | translate}}"
+                      [ngClass]="{ 'is-invalid': submitted && employeeform.controls.firstName.errors }">
+                    <div *ngIf="submitted && employeeform.controls.firstName.errors" class="invalid-feedback">
+                      <div *ngIf="employeeform.get('firstName')?.errors?.['required']">{{'First Name is required.' |
+                        translate}}</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xxl-3 col-lg-4 col-sm-6">
+                  <div class="mb-3">
+                    <label class="form-label" for="4">{{'Middle Name' | translate}}</label>
+                    <input type="text" class="form-control" formControlName="middleName" id="4"
+                      placeholder="{{'Enter Middle Name' | translate}}">
+                  </div>
+                </div>
+                <div class="col-xxl-3 col-lg-4 col-sm-6">
+                  <div class="mb-3">
+                    <label class="form-label" for="5">{{'Last Name' | translate}} <span
+                        class="text-danger">*</span></label>
+                    <input type="text" class="form-control" formControlName="lastName" id="5"
+                      placeholder="{{'Enter Last Name' | translate}}"
+                      [ngClass]="{ 'is-invalid': submitted && employeeform.controls.lastName.errors }">
+                    <div *ngIf="submitted && employeeform.controls.lastName.errors" class="invalid-feedback">
+                      <div *ngIf="employeeform.get('lastName')?.errors?.['required']">{{'Last Name is Required.' |
+                        translate}}</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xxl-3 col-lg-4 col-sm-6">
+                  <div class="mb-3">
+                    <label class="form-label" for="6">{{'First NameL' | translate}}</label>
+                    <input type="text" class="form-control" formControlName="firstNameL" id="6"
+                      placeholder="{{'Enter First NameL' | translate}}">
+                  </div>
+                </div>
+                <div class="col-xxl-3 col-lg-4 col-sm-6">
+                  <div class="mb-3">
+                    <label class="form-label" for="7">{{'Middle NameL' | translate}}</label>
+                    <input type="text" class="form-control" formControlName="middleNameL" id="7"
+                      placeholder="{{'Enter Middle NameL' | translate}}">
+                  </div>
+                </div>
+                <div class="col-xxl-3 col-lg-4 col-sm-6">
+                  <div class="mb-3">
+                    <label class="form-label" for="8">{{'Last NameL' | translate}}</label>
+                    <input type="text" class="form-control" formControlName="lastNameL" id="8"
+                      placeholder="{{'Enter Last NameL' | translate}}">
+                  </div>
+                </div>
+                <div class="col-xxl-3 col-lg-4 col-sm-6">
+                  <div class="mb-3">
+                    <label class="form-label" for="9">{{'Gender' | translate}} <span
+                        class="text-danger">*</span></label>
+                    <input type="number" class="form-control noArrowNum" formControlName="gender" id="9"
+                      placeholder="{{'Enter Gender' | translate}}"
+                      [ngClass]="{ 'is-invalid': submitted && employeeform.controls.gender.errors }">
+                    <div *ngIf="submitted && employeeform.controls.gender.errors" class="invalid-feedback">
+                      <div *ngIf="employeeform.get('gender')?.errors?.['required']">{{'Gender is Required.' |
+                        translate}}</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xxl-3 col-lg-4 col-sm-6">
+                  <div class="mb-3">
+                    <label class="form-label" for="10">{{'DOB' | translate}} <span class="text-danger">*</span></label>
+                    <input type="date" class="form-control" formControlName="dob" id="10"
+                      [ngClass]="{ 'is-invalid': submitted && employeeform.controls.dob.errors }">
+                    <div *ngIf="submitted && employeeform.controls.dob.errors" class="invalid-feedback">
+                      <div *ngIf="employeeform.get('dob')?.errors?.['required']">{{'DOB is Required.' | translate}}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xxl-3 col-lg-4 col-sm-6">
+                  <div class="mb-3">
+                    <label class="form-label" for="11">{{'Marital Status' | translate}}</label>
+                    <select class="form-select" id="11" formControlName="maritalStatusId">
+                      <option value="0">{{'Select Marital Status'| translate}}</option>
+                      <option [value]="Item.dropdownValueId" *ngFor="let Item of maritalData">
+                        [{{Item.code}}] {{Item.value}}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-xxl-3 col-lg-4 col-sm-6">
+                  <div class="mb-3">
+                    <label class="form-label" for="12">{{'Mobile No' | translate}}</label>
+                    <input type="text" class="form-control" formControlName="mobile" id="12"
+                      placeholder="{{'Enter Mobile No' | translate}}">
+                  </div>
+                </div>
+                <div class="col-xxl-3 col-lg-4 col-sm-6">
+                  <div class="mb-3">
+                    <label class="form-label" for="13">{{'National Id Type' | translate}}<span
+                        class="text-danger">*</span></label>
+                    <select class="form-select" id="13" formControlName="nationalIdType"
+                      [ngClass]="{ 'is-invalid': submitted && employeeform.controls.nationalIdType.errors }">
+                      <option value="0">{{'Select National Id Type'| translate}}</option>
+                      <option [value]="Item.dropdownValueId" *ngFor="let Item of nationalData">
+                        [{{Item.code}}] {{Item.value}}
+                      </option>
+                    </select>
+                    <div *ngIf="submitted && employeeform.controls.nationalIdType.errors" class="invalid-feedback">
+                      <div *ngIf="employeeform.get('nationalIdType')?.errors?.['required']">{{'Please Select National Id Type' | translate}}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xxl-3 col-lg-4 col-sm-6">
+                  <div class="mb-3">
+                    <label class="form-label" for="14">{{'National Id' | translate}} <span
+                        class="text-danger">*</span></label>
+                    <input type="text" class="form-control" formControlName="nationalId" id="14"
+                      placeholder="{{'Enter National Id' | translate}}"
+                      [ngClass]="{ 'is-invalid': submitted && employeeform.controls.nationalId.errors }">
+                    <div *ngIf="submitted && employeeform.controls.nationalId.errors" class="invalid-feedback">
+                      <div *ngIf="employeeform.get('nationalId')?.errors?.['required']">{{'National Id is Required.' | translate}}</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xxl-3 col-lg-4 col-sm-6">
+                  <div class="mb-3">
+                    <label class="form-label" for="15">{{'Nationality' | translate}} <span
+                        class="text-danger">*</span></label>
+                    <input type="number" class="form-control noArrowNum" formControlName="nationality" id="15"
+                      placeholder="{{'Enter Nationality' | translate}}"
+                      [ngClass]="{ 'is-invalid': submitted && employeeform.controls.nationality.errors }">
+                    <div *ngIf="submitted && employeeform.controls.nationality.errors" class="invalid-feedback">
+                      <div *ngIf="employeeform.get('nationality')?.errors?.['required']">{{'Nationality is Required.' |
+                        translate}}</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xxl-3 col-lg-4 col-sm-6">
+                  <div class="mb-3">
+                    <label class="form-label" for="16">{{'Remarks' | translate}}</label>
+                    <textarea type="text" class="form-control" formControlName="remarks" id="16"
+                      placeholder="{{'Enter Remarks' | translate}}"></textarea>
+                  </div>
+                </div>
+              </div>
+            </form>
+            <div class="col-sm-12">
+              <div class="d-flex gap-2 justify-content-end">
+                <a type="button" class="btn btn-outline-secondary" routerLink="/employee-list">{{'Cancel'|
+                  translate}}</a>
+                <a *ngIf="!editMode" type="button" class="btn btn-primary" (click)="saveForm()">
+                  {{'Save'| translate}}
+                </a>
+                <a *ngIf="editMode" type="button" class="btn btn-primary" (click)="saveForm()">
+                  {{'Update'| translate}}
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Row starts -->
+    <div class="row gx-3 mt-3" *ngIf="editMode">
+      <div class="col-sm-12">
+        <div class="accordion mb-3" id="accordionSpecialTitle">
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingSpecialTitleTwo">
+              <button class="accordion-button " type="button" data-bs-toggle="collapse"
+                data-bs-target="#collapseSpecialTitleTwo" aria-expanded="true" aria-controls="collapseSpecialTitleTwo">
+                <div class="d-flex flex-column">
+                  <h5 class="m-0">{{'Contract'| translate}}</h5>
+                </div>
+              </button>
+            </h2>
+            <div id="collapseSpecialTitleTwo" class="accordion-collapse collapse show"
+              aria-labelledby="headingSpecialTitleTwo" data-bs-parent="#accordionSpecialTitle">
+              <div class="accordion-body">
+                <div class="row">
+                  <div class="col-12">
+                    <!-- Row Start -->
+                    <form [formGroup]="contractForm">
+                      <div class="row gx-3 mt-1 ">
+                        <div class="col-xxl-3 col-lg-3 col-sm-6">
+                          <div class="mb-3">
+                            <label class="form-label" for="a1">{{'Contract Number'| translate}} <span
+                                class="text-danger">*</span></label>
+                            <input type="text" class="form-control" formControlName="contractNumber" id="a1"
+                              placeholder="{{'Enter Contract Number'| translate}}"
+                              [ngClass]="{'is-invalid': submitted2 && contractForm.controls.contractNumber.errors}">
+                            <div *ngIf="submitted2 && contractForm.controls.contractNumber.errors"
+                              class="invalid-feedback">
+                              <div *ngIf="contractForm.get('contractNumber')?.errors?.['required']">
+                                {{'Contract Number is required.' | translate}}
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-xxl-3 col-lg-3 col-sm-6">
+                          <div class="mb-3">
+                            <label class="form-label" for="a4">{{'Start Date'| translate}}<span class="text-danger">*</span></label>
+                            <input type="date" class="form-control" formControlName="contractStartDate" id="a4"
+                              [ngClass]="{'is-invalid': submitted2 && contractForm.controls.contractStartDate.errors}">
+                            <div *ngIf="submitted2 && contractForm.controls.contractStartDate.errors"
+                              class="invalid-feedback">
+                              <div *ngIf="contractForm.get('contractStartDate')?.errors?.['required']">
+                                {{'Start Date is required.' | translate}}
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-xxl-3 col-lg-3 col-sm-6">
+                          <div class="mb-3">
+                            <label class="form-label" for="a5">{{'End Date'| translate}}<span
+                                class="text-danger">*</span></label>
+                            <input type="date" class="form-control" formControlName="contractEndDate" id="a5" [ngClass]="{'is-invalid': submitted2 && contractForm.controls.contractEndDate.errors}">
+                            <div *ngIf="submitted2 && contractForm.controls.contractEndDate.errors"
+                              class="invalid-feedback">
+                              <div *ngIf="contractForm.get('contractEndDate')?.errors?.['required']">
+                                {{'End Date is required.' | translate}}
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-xxl-3 col-lg-3 col-sm-6">
+                          <div class="mb-3">
+                            <label class="form-label" for="a2">{{'Contract Type'| translate}}<span class="text-danger">*</span></label>
+                            <select class="form-select" id="a2" formControlName="contractTypeId" [ngClass]="{'is-invalid': submitted2 && contractForm.controls.contractTypeId.errors}">
+                              <option value="null">{{'Select Contract Type'| translate}}</option>
+                              <option [value]="Item.dropdownValueId" *ngFor="let Item of contractData">
+                               {{Item.value}}
+                              </option>
+                            </select>
+                            <div *ngIf="submitted2 && contractForm.controls.contractTypeId.errors"
+                              class="invalid-feedback">
+                              <div *ngIf="contractForm.get('contractTypeId')?.errors?.['required']">
+                                {{'Please Select Contract Type' | translate}}
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-xxl-3 col-lg-3 col-sm-6">
+                          <div class="mb-3">
+                            <label class="form-label" for="a3">{{'Job Title'| translate}}</label>
+                            <input type="text" class="form-control" formControlName="jobTitle" id="a3"
+                              placeholder="{{'Enter Job Title'| translate}}">
+                          </div>
+                        </div>
+                        <div class="col-xxl-3 col-lg-3 col-sm-6">
+                          <div class="mb-3">
+                            <label class="form-label" for="a6">{{'Probation Period Days'| translate}}</label>
+                            <input type="number" class="form-control noArrowNum" formControlName="probationPeriodDays"
+                              id="a6" placeholder="{{'Enter Probation Period Days'| translate}}">
+                          </div>
+                        </div>
+                        <div class="col-xxl-3 col-lg-3 col-sm-6">
+                          <div class="mb-3">
+                            <label class="form-label" for="a7">{{'Working Hours Per Day'| translate}}</label>
+                            <input type="number" class="form-control noArrowNum" formControlName="workingHoursPerDay"
+                              id="a7" placeholder="{{'Enter Working Hours Per Day'| translate}}">
+                          </div>
+                        </div>
+                        <div class="col-xxl-3 col-lg-3 col-sm-6">
+                          <div class="mb-3">
+                            <label class="form-label" for="a8">{{'Working Days Per Week'| translate}}</label>
+                            <input type="number" class="form-control noArrowNum" formControlName="workingDaysPerWeek"
+                              id="a8" placeholder="{{'Enter Working Days Per Week'| translate}}">
+                          </div>
+                        </div>
+                        <div class="col-xxl-3 col-lg-3 col-sm-6">
+                          <div class="mb-3">
+                            <label class="form-label" for="a9">{{'Basic Salary'| translate}}</label>
+                            <input type="number" class="form-control noArrowNum" formControlName="basicSalary" id="a9"
+                              placeholder="{{'Enter Basic Salary'| translate}}">
+                          </div>
+                        </div>
+                        <div class="col-xxl-3 col-lg-3 col-sm-6">
+                          <div class="mb-3">
+                            <label class="form-label" for="a10">{{'Housing Allowance'| translate}}</label>
+                            <input type="number" class="form-control noArrowNum" formControlName="housingAllowance"
+                              id="a10" placeholder="{{'Enter Housing Allowance'| translate}}">
+                          </div>
+                        </div>
+                        <div class="col-xxl-3 col-lg-3 col-sm-6">
+                          <div class="mb-3">
+                            <label class="form-label" for="a11">{{'Transportation Allowance'| translate}}</label>
+                            <input type="number" class="form-control noArrowNum"
+                              formControlName="transportationAllowance" id="a11"
+                              placeholder="{{'Enter Transportation Allowance'| translate}}">
+                          </div>
+                        </div>
+                        <div class="col-xxl-3 col-lg-3 col-sm-6">
+                          <div class="mb-3">
+                            <label class="form-label" for="a12">{{'Other Allowances'| translate}}</label>
+                            <input type="number" class="form-control noArrowNum" formControlName="otherAllowances"
+                              id="a12" placeholder="{{'Enter Other Allowances'| translate}}">
+                          </div>
+                        </div>
+                        <div class="col-xxl-3 col-lg-3 col-sm-6">
+                          <div class="mb-3">
+                            <label class="form-label" for="a13">{{'Total Salary'| translate}}</label>
+                            <input type="number" class="form-control noArrowNum" formControlName="totalSalary" id="a13"
+                              placeholder="{{'Enter Total Salary'| translate}}">
+                          </div>
+                        </div>
+                        <div class="col-xxl-3 col-lg-3 col-sm-6">
+                          <div class="mb-3">
+                            <label class="form-label" for="a14">{{'Contract Image' | translate}}</label>
+                            <div class="input-group">
+                              <input type="file" class="form-control" id="a14">
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                    <div class="col-sm-12">
+                      <div class="d-flex gap-2 justify-content-end">
+                        <a type="button" class="btn btn-outline-secondary" (click)="clearform()">{{'Cancel'|
+                          translate}}</a>
+                        <a *ngIf="!editModeEmployeeContract" type="button" class="btn btn-primary"
+                          (click)="saveContract()">{{'Save'| translate}}</a>
+                        <a *ngIf="editModeEmployeeContract" type="button" class="btn btn-primary"
+                          (click)="saveContract()">{{'Update'| translate}}</a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <div class="table-outer mt-3">
+                      <div class="table-responsive">
+                        <table class="table truncate m-0">
+                          <thead>
+                            <tr>
+                              <th>{{'Contract Number'| translate}}</th>
+                              <th>{{'Job Title'| translate}}</th>
+                              <th>{{'Contract Start Date'| translate}}</th>
+                              <th>{{'Contract End Date'| translate}}</th>
+                              <th>{{'Probation Period Days'| translate}}</th>
+                              <th>{{'Working Hours Per Day'| translate}}</th>
+                              <th>{{'Working Days Per Week'| translate}}</th>
+                              <th>{{'Action'| translate}}</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr *ngFor="let item of eContractData">
+                              <td>{{item.contractNumber || 'N/A'}}</td>
+                              <td>{{item.jobTitle || 'N/A'}}</td>
+                              <td>{{item.contractStartDate | date:'dd/MM/YYYY'}}</td>
+                              <td>{{item.contractEndDate | date:'dd/MM/YYYY'}}</td>
+                              <td>{{item.probationPeriodDays || 'N/A'}}</td>
+                              <td>{{item.workingHoursPerDay || 'N/A'}}</td>
+                              <td>{{item.workingDaysPerWeek || 'N/A'}}</td>
+                              <td class="p-1">
+                                <a class="btn btn-outline-success btn-sm table-btn" data-bs-placement="bottom"
+                                  title="Edit" data-bs-toggle="tooltip" (click)="editContract(item)">
+                                  <i class="ri-edit-box-line"></i>
+                                </a>
+                              </td>
+                            </tr>
+                            <tr *ngIf="notFound == true">
+                              <td>{{'Data Not Found' | translate}}</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingSpecialTitleThree">
+              <button class="accordion-button " type="button" data-bs-toggle="collapse"
+                data-bs-target="#collapseSpecialTitleThree" aria-expanded="true"
+                aria-controls="collapseSpecialTitleThree">
+                <div class="d-flex flex-column">
+                  <h5 class="m-0">{{'Gosi Contribution'| translate}}</h5>
+                </div>
+              </button>
+            </h2>
+            <div id="collapseSpecialTitleThree" class="accordion-collapse collapse"
+              aria-labelledby="headingSpecialTitleThree" data-bs-parent="#accordionSpecialTitle">
+              <div class="accordion-body">
+                <div class="row">
+                  <div class="col-12">
+                    <!-- Row Start -->
+                    <form [formGroup]="contributionForm">
+                      <div class="row gx-3 mt-1 ">
+                        <div class="col-xxl-3 col-lg-3 col-sm-6">
+                          <div class="mb-3">
+                            <label class="form-label" for="a23">{{'Employer Contribution Amount'| translate}}<span
+                                class="text-danger">*</span></label>
+                            <input type="number" class="form-control noArrowNum"
+                              formControlName="employerContributionAmount" id="a23" placeholder="{{'Enter Employer Contribution Amount'| translate}}"
+                              [ngClass]="{'is-invalid': submitted3 && contributionForm.controls.employerContributionAmount.errors}">
+                            <div *ngIf="submitted3 && contributionForm.controls.employerContributionAmount.errors"
+                              class="invalid-feedback">
+                              <div *ngIf="contributionForm.get('employerContributionAmount')?.errors?.['required']">
+                                {{'Employer Contribution Amount is required.' | translate}}
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-xxl-3 col-lg-3 col-sm-6">
+                          <div class="mb-3">
+                            <label class="form-label" for="a24">{{'Employee Contribution Amount'| translate}}<span
+                                class="text-danger">*</span></label>
+                            <input type="number" class="form-control noArrowNum" formControlName="employeeContributionAmount"
+                              id="a24" placeholder="{{'Enter Employee Contribution Amount'| translate}}"
+                              [ngClass]="{'is-invalid': submitted3 && contributionForm.controls.employeeContributionAmount.errors}">
+                            <div *ngIf="submitted3 && contributionForm.controls.employeeContributionAmount.errors"
+                              class="invalid-feedback">
+                              <div *ngIf="contributionForm.get('employeeContributionAmount')?.errors?.['required']">
+                                {{'Employee Contribution Amount is required.' | translate}}
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-xxl-3 col-lg-3 col-sm-6">
+                          <div class="mb-3">
+                            <label class="form-label" for="a25">{{'Total Contribution Amount'| translate}}</label>
+                            <input type="number" class="form-control noArrowNum"
+                              formControlName="totalContributionAmount" id="a25"
+                              placeholder="{{'Enter Total Contribution Amount'| translate}}">
+                          </div>
+                        </div>                      
+                        <div class="col-xxl-3 col-lg-3 col-sm-6">
+                          <div class="mb-3">
+                            <label class="form-label" for="a21">{{'Month Year'| translate}}</label>
+                            <input type="date" class="form-control" formControlName="monthYear" id="a21"
+                              placeholder="{{'Enter Month Year'| translate}}">
+                          </div>
+                        </div>
+                        <div class="col-xxl-3 col-lg-3 col-sm-6">
+                          <div class="mb-3">
+                            <label class="form-label" for="a22">{{'Gross Salary'| translate}}</label>
+                            <input type="number" class="form-control noArrowNum" formControlName="grossSalary" id="a22"
+                              placeholder="{{'Enter Gross Salary'| translate}}">
+                          </div>
+                        </div>
+                        <div class="col-xxl-3 col-lg-3 col-sm-6">
+                          <div class="mb-3">
+                            <label class="form-label" for="a27">{{'Payment Date'| translate}}</label>
+                            <input type="date" class="form-control" formControlName="paymentDate" id="a27">
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                    <div class="col-sm-12">
+                      <div class="d-flex gap-2 justify-content-end">
+                        <a type="button" class="btn btn-outline-secondary" (click)="clearform1()">{{'Cancel'|
+                          translate}}</a>
+                        <a *ngIf="!editModeEmployeeContribution" type="button" class="btn btn-primary" (click)="saveContribution()">{{'Save'| translate}}</a>
+                        <a *ngIf="editModeEmployeeContribution" type="button" class="btn btn-primary" (click)="saveContribution()">{{'Update'| translate}}</a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <div class="table-outer mt-3">
+                      <div class="table-responsive">
+                        <table class="table truncate m-0">
+                          <thead>
+                            <tr>
+                              <th>{{'Month Year'| translate}}</th>
+                              <th>{{'Gross Salary'| translate}}</th>
+                              <th>{{'Employer Contribution Amount'| translate}}</th>
+                              <th>{{'Employee Contribution Amount'| translate}}</th>
+                              <th>{{'Total Contribution Amount'| translate}}</th>
+                              <th>{{'Payment Date'| translate}}</th>
+                              <th>{{'Action'| translate}}</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr *ngFor="let item of eContributionData">
+                              <td>{{item.monthYear | date:'dd/MM/YYYY'}}</td>
+                              <td>{{item.grossSalary || 'N/A'}}</td>
+                              <td>{{item.employerContributionAmount || 'N/A'}}</td>
+                              <td>{{item.employeeContributionAmount || 'N/A'}}</td>
+                              <td>{{item.totalContributionAmount || 'N/A'}}</td>
+                              <td>{{item.paymentDate | date:'dd/MM/YYYY'}}</td>
+                              <td class="p-1">
+                                <a class="btn btn-outline-success btn-sm table-btn" data-bs-placement="bottom"
+                                  title="Edit" data-bs-toggle="tooltip" (click)="editContribution(item)">
+                                  <i class="ri-edit-box-line"></i>
+                                </a>
+                              </td>
+                            </tr>
+                            <tr *ngIf="notFound1 == true">
+                              <td>{{'Data Not Found' | translate}}</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Row ends -->
+  </div>
+</div>
