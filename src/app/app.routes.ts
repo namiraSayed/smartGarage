@@ -16,6 +16,7 @@ import { UserFormComponent } from './user-form/user-form.component';
 import { DropdownComponent } from './dropdown/dropdown.component';
 import { BranchListComponent } from './branch-list/branch-list.component';
 import { BranchFormComponent } from './branch-form/branch-form.component';
+import { BillingSearchComponent } from './billing-search/billing-search.component';
 export const routes: Routes = [
   {
     path: '',
@@ -51,6 +52,12 @@ export const routes: Routes = [
       { path: 'branch-list', component: BranchListComponent},
       { path: 'branch', component: BranchFormComponent},
       { path: 'branch/:id', component: BranchFormComponent },
+
+
+
+
+
+      { path: 'billing-search', component: BillingSearchComponent},
 
      ],
   },
