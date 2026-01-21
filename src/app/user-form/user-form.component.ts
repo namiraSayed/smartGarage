@@ -49,9 +49,9 @@ export class UserFormComponent {
     isActive: [true],
     previousPasswordHashes: [''],
     previousPasswordSalts: [''],
-    appRoleId: [0],
-    branchUnitId: [0],
-    startDate: [''],
+    appRoleId: [],
+    branchUnitId: [],
+    startDate: ['2025-12-01T08:36:29.209Z'],
     createdBy: [null],
     createdAt: [null],
     updatedBy: [null],
@@ -80,9 +80,6 @@ export class UserFormComponent {
         passwordHash: apuser.passwordHash,
         phoneNumber: apuser.phoneNumber,
         isActive: apuser.isActive,
-        appRoleId: apuser.appRoleId,
-        branchUnitId: apuser.branchUnitId,
-        startDate: moment(apuser.startDate).format('YYYY-MM-DD'),
         createdBy: apuser.createdBy,
         createdAt: apuser.createdAt,
         updatedBy: apuser.updatedBy,
@@ -91,24 +88,6 @@ export class UserFormComponent {
         operationCode: apuser.operationCode,
       })
     })
-  }
-
-  roleData: any;
-  getroleData() {
-    this.spinner.show();
-    this.http.get(this.serverUrl + "UserProcess/GetAppRoleAll").subscribe((result: any) => {
-        this.roleData = result.data.appRole;
-        this.spinner.hide();
-      });
-  }
-
-  branchUnitData: any;
-  getbranchUnitData() {
-    this.spinner.show();
-    this.http.get(this.serverUrl + "MasterProcess/GetBranchUnitAll").subscribe((result: any) => {
-        this.branchUnitData = result.data.branchUnt;
-        this.spinner.hide();
-      });
   }
 
   userTypeData: any;
@@ -156,23 +135,11 @@ export class UserFormComponent {
   }
 
   ngAfterViewInit() {
-    $('#8').on('change', (event: any) => {
-      var selectVal = parseInt(event.target.value);
-      console.log(selectVal, 'appRoleId');
-      //you can use the selected value
-      this.user.get('appRoleId')?.setValue(selectVal);
-    });
     $('#1').on('change', (event: any) => {
       var selectVal = parseInt(event.target.value);
       console.log(selectVal, 'appUserTypeId');
       //you can use the selected value
       this.user.get('appUserTypeId')?.setValue(selectVal);
-    });
-    $('#9').on('change', (event: any) => {
-      var selectVal = parseInt(event.target.value);
-      console.log(selectVal, 'branchUnitId');
-      //you can use the selected value
-      this.user.get('branchUnitId')?.setValue(selectVal);
     });
     $('#2').on('change', (event: any) => {
       var selectVal = parseInt(event.target.value);
@@ -181,17 +148,21 @@ export class UserFormComponent {
       this.user.get('appMasterId')?.setValue(selectVal);
     });
   }
-
+  userloginData:any;
   isNew = true
   ngOnInit() {
+    let userD:any = localStorage.getItem('8FB6N6GSUD')
+    let user = JSON.parse(userD);
+    this.userloginData = user.appUserRole
+    this.user.patchValue({
+      appRoleId: this.userloginData.appRoleId,
+      branchUnitId: user.branchUnitId
+    })
     const id = this.route.snapshot.paramMap.get('id')
     if (id) {
       this.isNew = false
       this.getUser(id)
     }
-    $('#9').select2();
-    this.getroleData();
-    this.getbranchUnitData();
     this.getappMasterData();
     this.getuserTypeData();
   }

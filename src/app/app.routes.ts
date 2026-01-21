@@ -14,6 +14,8 @@ import { EmployeeFormComponent } from './employee-form/employee-form.component';
 import { UserListComponent } from './user-list/user-list.component';
 import { UserFormComponent } from './user-form/user-form.component';
 import { DropdownComponent } from './dropdown/dropdown.component';
+import { BranchListComponent } from './branch-list/branch-list.component';
+import { BranchFormComponent } from './branch-form/branch-form.component';
 export const routes: Routes = [
   {
     path: '',
@@ -46,6 +48,9 @@ export const routes: Routes = [
       { path: 'user-list', component: UserListComponent},
       { path: 'user', component: UserFormComponent},
       { path: 'user/:id', component: UserFormComponent },
+      { path: 'branch-list', component: BranchListComponent},
+      { path: 'branch', component: BranchFormComponent},
+      { path: 'branch/:id', component: BranchFormComponent },
 
      ],
   },

@@ -103,40 +103,6 @@
                     </div>
                   </div>
                 </div>
-                <div class="col-xxl-3 col-lg-12 col-sm-12">
-                    <div class="mb-3">
-                    <label class="form-label" for="8">{{'Role' | translate}}</label>
-                    <div class="input-group">
-                        <select class="form-select" id="8" class="form-control" formControlName="appRoleId">
-                            <option value="0">{{'Select Role'| translate}}</option>
-                            <option  *ngFor="let item of roleData" value="{{item.appRoleId}}">
-                                {{item.roleName}}
-                            </option>
-                        </select>
-                    </div>
-                    </div>
-                </div>
-                <div class="col-xxl-3 col-lg-12 col-sm-12">
-                    <div class="mb-3">
-                    <label class="form-label" for="9">{{'Branch Unit' | translate}}</label>
-                    <div class="input-group">
-                        <select class="form-select" id="9" class="form-control" formControlName="branchUnitId">
-                            <option value="null">{{'Select Branch Unit'| translate}}</option>
-                            <option *ngFor="let item of branchUnitData" value="{{item.branchUnitId}}">
-                                [{{item.code}}] {{item.branchUnit}}
-                            </option>
-                        </select>
-                    </div>
-                    </div>
-                </div>
-                <div class="col-xxl-3 col-lg-4 col-sm-6">
-                  <div class="mb-3">
-                    <label class="form-label" for="10">{{'Start Date'| translate}}</label>
-                    <div class="input-group">
-                      <input type="date" class="form-control" formControlName="startDate" id="10">
-                    </div>
-                  </div>
-                </div>
                 <div class="col-xxl-2 col-lg-4 col-sm-6">
                     <div class="mb-3">
                         <div class="form-check form-switch mt-4">
